@@ -19,15 +19,8 @@ jobs:
           echo "Usuario: ${{ secrets.SERVER_USER }}"
           echo "Puerto SSH: ${{ secrets.SERVER_SSH_PORT }}"
 
-      - name: Crear carpeta y subir archivos al servidor
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}  # Cambiar vars a secrets
-          source: "."
-          target: "/var/www/php-docker-ci-cd"
+      - name: Crear carpeta
+        run: mkdir -p var/www/php-docker-ci-cd
       
       - name: Copiar archivos al servidor con puerto SSH personalizado
         uses: appleboy/scp-action@v0.1.4
